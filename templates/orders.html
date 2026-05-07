@@ -1,14 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="form-container">
-    <h2 style="color: #a55166; text-align: center; margin-bottom: 1.5rem;">👤 Моят профил</h2>
-    <div style="margin-bottom: 1rem;">
-        <p><strong>Потребителско име:</strong> {{ user.username }}</p>
-        <p><strong>Имейл:</strong> {{ user.email }}</p>
-        <p><strong>Регистриран на:</strong> {{ user.created_at[:10] }}</p>
+<h1 style="color: #a55166;">📦 Моите поръчки</h1>
+
+{% if orders %}
+    {% for order in orders %}
+    <div style="background: white; border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 2px solid #f7dae7;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 style="color: #a55166; margin: 0;">Поръчка № {{ order.id }}</h3>
+            <span style="background: {% if order.status == 'pending' %}#ffc107{% elif order.status == 'delivered' %}#28a745{% else %}#6c757d{% endif %}; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">
+                {% if order.status == 'pending' %}Чакане{% elif order.status == 'delivered' %}Доставена{% else %}{{ order.status }}{% endif %}
+            </span>
+        </div>
+
+        <p style="margin: 8px 0; color: #666;">
+            <strong>Дата:</strong> {{ order.date[:10] }} в {{ order.date[11:16] }}
+        </p>
+
+        <hr style="margin: 15px 0; border-color: #f0e0e6;">
+
+        <div style="margin-bottom: 15px;">
+            <strong style="color: #a55166;">Продукти:</strong>
+            <table style="width: 100%; margin-top: 10px; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #f7dae7;">
+                        <th style="padding: 10px; text-align: left; border-radius: 10px 0 0 0;">Продукт</th>
+                        <th style="padding: 10px; text-align: left;">Цена</th>
+                        <th style="padding: 10px; text-align: left;">Количество</th>
+                        <th style="padding: 10px; text-align: left; border-radius: 0 10px 0 0;">Общо</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order['items'] %}
+                    <tr style="border-bottom: 1px solid #f0e0e6;">
+                        <td style="padding: 10px;">{{ item.name }}</td>
+                        <td style="padding: 10px;">{{ "%.2f"|format(item.price) }} лв.</td>
+                        <td style="padding: 10px;">{{ item.quantity }}</td>
+                        <td style="padding: 10px;">{{ "%.2f"|format(item.price * item.quantity) }} лв.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div style="text-align: right; padding: 15px; background: #f7dae7; border-radius: 10px; margin-top: 15px;">
+            <strong style="font-size: 1.1rem; color: #a55166;">Обща сума: {{ "%.2f"|format(order.total) }} лв.</strong>
+        </div>
     </div>
-    <hr style="margin: 1.5rem 0; border-color: #f0e0e6;">
-    <a href="/logout" class="btn" style="background: #dc3545; width: 100%; text-align: center;">🚪 Изход от профила</a>
-</div>
+    {% endfor %}
+{% else %}
+    <div style="text-align: center; padding: 50px; background: white; border-radius: 20px;">
+        <p style="font-size: 1.2rem; color: #8a6e7a;">📦 Нямате поръчки</p>
+        <a href="/products" class="btn" style="display: inline-block; margin-top: 20px;">Начнете пазаруването →</a>
+    </div>
+{% endif %}
 {% endblock %}

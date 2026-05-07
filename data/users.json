@@ -5,5 +5,26 @@
         "password": "pbkdf2:sha256:600000$PrmbaMPMo8AcXhwS$cc143a013fe7ebee51484914d9fd4d3d75553ef29ba69595bb5a495b661bb7ac",
         "email": "kur@kur.bg",
         "created_at": "2026-05-07T09:59:37.434830"
+    },
+    {
+        "id": 2,
+        "username": "testuser",
+        "password": "pbkdf2:sha256:600000$8DtO4Q0BPqVbU0Q4$4bb31f710dff4a54261720acb8fea3367dedf6194fd83a69f7702a60b8b3687f",
+        "email": "test@example.com",
+        "created_at": "2026-05-07T10:16:59.834039"
+    },
+    {
+        "id": 3,
+        "username": "testuser3",
+        "password": "pbkdf2:sha256:600000$fkePn2xDcAR8aTw7$6aa87dbbab0d792374c9ec2cafff9c6821678e0403a27e77a4c1287b44d0fd2c",
+        "email": "test3@example.com",
+        "created_at": "2026-05-07T10:17:22.059095"
+    },
+    {
+        "id": 4,
+        "username": "testuser4",
+        "password": "pbkdf2:sha256:600000$L4bymGkN6OnRqXO6$307380cea324aea964193ea34b822a917e40a4061663be3be866e43cab45eb73",
+        "email": "test4@example.com",
+        "created_at": "2026-05-07T10:17:58.347464"
     }
 ]

@@ -3,7 +3,7 @@
 {% block content %}
 <h1 style="color: #a55166;">🛒 Моята количка</h1>
 
-{% if cart.items %}
+{% if cart['items'] %}
     <table class="cart-table" style="width: 100%; border-collapse: collapse; background: white; border-radius: 20px; overflow: hidden;">
         <thead>
             <tr style="background: #f7dae7; color: #a55166;">
@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in cart.items %}
+            {% for item in cart['items'] %}
             <tr style="border-bottom: 1px solid #f0e0e6;">
                 <td style="padding: 15px;">{{ item.name }}</td>
                 <td style="padding: 15px;">{{ "%.2f"|format(item.price) }} лв.</td>
@@ -35,7 +35,7 @@
         <tfoot>
             <tr style="background: #f7dae7;">
                 <td colspan="3" style="padding: 15px; text-align: right;"><strong>Общо:</strong></td>
-                <td colspan="2" style="padding: 15px;"><strong>{{ "%.2f"|format(cart.total) }} лв.</strong></td>
+                <td colspan="2" style="padding: 15px;"><strong>{{ "%.2f"|format(cart['total']) }} лв.</strong></td>
             </tr>
         </tfoot>
     </table>

@@ -95,7 +95,8 @@ def products():
 @app.route('/add_to_cart/<int:product_id>')
 @login_required
 def add_to_cart(product_id):
-    add_to_cart(session['user_id'], product_id, 1)
+    from data_access import add_to_cart as add_to_cart_db
+    add_to_cart_db(session['user_id'], product_id, 1)
     flash('Продуктът беше добавен в количката!', 'success')
     return redirect(request.referrer or url_for('products'))
 
@@ -119,7 +120,8 @@ def update_cart(product_id):
 @app.route('/remove_from_cart/<int:product_id>')
 @login_required
 def remove_from_cart(product_id):
-    remove_from_cart(session['user_id'], product_id)
+    from data_access import remove_from_cart as remove_from_cart_db
+    remove_from_cart_db(session['user_id'], product_id)
     flash('Продуктът беше премахнат', 'info')
     return redirect(url_for('cart'))
 

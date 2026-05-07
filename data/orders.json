@@ -1,1 +1,47 @@
-[]
+[
+    {
+        "id": 1,
+        "user_id": 2,
+        "total": 65.98,
+        "items": [
+            {
+                "product_id": 1,
+                "name": "Test Product",
+                "price": 32.99,
+                "quantity": 2
+            }
+        ],
+        "date": "2026-05-07T10:16:59.835701",
+        "status": "pending"
+    },
+    {
+        "id": 2,
+        "user_id": 3,
+        "total": 65.98,
+        "items": [
+            {
+                "product_id": 1,
+                "name": "Test Product",
+                "price": 32.99,
+                "quantity": 2
+            }
+        ],
+        "date": "2026-05-07T10:17:22.084318",
+        "status": "pending"
+    },
+    {
+        "id": 3,
+        "user_id": 4,
+        "total": 65.98,
+        "items": [
+            {
+                "product_id": 1,
+                "name": "Test Product",
+                "price": 32.99,
+                "quantity": 2
+            }
+        ],
+        "date": "2026-05-07T10:17:58.349047",
+        "status": "pending"
+    }
+]
