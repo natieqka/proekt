@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2 style="color: #a55166; text-align: center; margin-bottom: 1.5rem;">👤 My Profile</h2>
+    <div style="margin-bottom: 1rem;">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Member since:</strong> {{ user.created_at[:10] }}</p>
+    </div>
+    <hr style="margin: 1.5rem 0; border-color: #f0e0e6;">
+    <a href="/logout" class="btn" style="background: #dc3545; width: 100%; text-align: center;">🚪 Sign Out</a>
+</div>
+{% endblock %}

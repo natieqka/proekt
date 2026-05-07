@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "username": "kur",
+        "password": "pbkdf2:sha256:600000$PrmbaMPMo8AcXhwS$cc143a013fe7ebee51484914d9fd4d3d75553ef29ba69595bb5a495b661bb7ac",
+        "email": "kur@kur.bg",
+        "created_at": "2026-05-07T09:59:37.434830"
+    }
+]

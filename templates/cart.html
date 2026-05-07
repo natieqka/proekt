@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="color: #a55166;">🛒 Моята количка</h1>
+
+{% if cart.items %}
+    <table class="cart-table" style="width: 100%; border-collapse: collapse; background: white; border-radius: 20px; overflow: hidden;">
+        <thead>
+            <tr style="background: #f7dae7; color: #a55166;">
+                <th style="padding: 15px; text-align: left;">Продукт</th>
+                <th style="padding: 15px; text-align: left;">Цена</th>
+                <th style="padding: 15px; text-align: left;">Количество</th>
+                <th style="padding: 15px; text-align: left;">Общо</th>
+                <th style="padding: 15px; text-align: left;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart.items %}
+            <tr style="border-bottom: 1px solid #f0e0e6;">
+                <td style="padding: 15px;">{{ item.name }}</td>
+                <td style="padding: 15px;">{{ "%.2f"|format(item.price) }} лв.</td>
+                <td style="padding: 15px;">
+                    <form method="POST" action="/update_cart/{{ item.product_id }}" style="display: flex; gap: 8px; align-items: center;">
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 60px; padding: 5px; border-radius: 10px; border: 1px solid #e2b4c1;">
+                        <button type="submit" style="background: #d38c9d; color: white; border: none; padding: 5px 12px; border-radius: 20px; cursor: pointer;">Обнови</button>
+                    </form>
+                </td>
+                <td style="padding: 15px;">{{ "%.2f"|format(item.subtotal) }} лв.</td>
+                <td style="padding: 15px;">
+                    <a href="/remove_from_cart/{{ item.product_id }}" style="background: #dc3545; color: white; padding: 5px 12px; border-radius: 20px; text-decoration: none;">✕ Премахни</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr style="background: #f7dae7;">
+                <td colspan="3" style="padding: 15px; text-align: right;"><strong>Общо:</strong></td>
+                <td colspan="2" style="padding: 15px;"><strong>{{ "%.2f"|format(cart.total) }} лв.</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div style="margin-top: 20px; text-align: right;">
+        <a href="/checkout" class="btn" style="background: #a55166; color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none;">📦 ФИНАЛИЗИРАЙ ПОРЪЧКАТА</a>
+    </div>
+
+{% else %}
+    <div style="text-align: center; padding: 50px; background: white; border-radius: 20px;">
+        <p style="font-size: 1.2rem; color: #8a6e7a;">🛒 Вашата количка е празна</p>
+        <a href="/products" class="btn" style="display: inline-block; margin-top: 20px;">Продължете с пазаруването →</a>
+    </div>
+{% endif %}
+{% endblock %}

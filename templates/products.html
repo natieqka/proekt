@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section style="text-align: center; margin-bottom: 2rem;">
+    <h1 style="color: #a55166; font-size: 2.5rem;">Нашите продукти</h1>
+    <p style="color: #8a6e7a;">Открийте грижа за кожата, която празнува вашата естествена красота</p>
+</section>
+
+<div class="filter-bar" style="background: white; padding: 1.5rem; border-radius: 60px; margin-bottom: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+    <form method="GET" action="/products" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: center;">
+        <div class="form-group" style="margin-bottom: 0;">
+            <select name="category" style="border-radius: 50px; padding: 0.7rem 1.5rem;">
+                {% for cat in categories %}
+                    <option value="{{ cat }}" {% if cat == current_category %}selected{% endif %}>{{ cat }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group" style="margin-bottom: 0; flex: 1; max-width: 300px;">
+            <input type="text" name="search" placeholder="Търсене на продукти..." value="{{ search }}" style="border-radius: 50px;">
+        </div>
+        <button type="submit" class="btn btn-small">Филтрирай</button>
+    </form>
+</div>
+
+<div class="products-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <div class="product-image">
+            {% if 'роз' in product.name.lower() %}🌹
+            {% elif 'лавандул' in product.name.lower() %}🌸
+            {% elif 'скраб' in product.name.lower() or 'полировка' in product.name.lower() %}✨
+            {% elif 'сет' in product.name.lower() or 'комплект' in product.name.lower() %}🎁
+            {% elif 'маска' in product.name.lower() %}💆‍♀️
+            {% elif 'чай' in product.name.lower() %}🍵
+            {% else %}🧴
+            {% endif %}
+        </div>
+        <div class="product-info">
+            <div class="product-category">{{ product.category }}</div>
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-description">{{ product.description }}</p>
+            <p class="product-price">{{ "%.2f"|format(product.price) }} лв.</p>
+            {% if session.user_id %}
+                <a href="/add_to_cart/{{ product.id }}" class="btn btn-small" style="width: 100%; text-align: center;">Добави в количка 🛒</a>
+            {% else %}
+                <a href="/login" class="btn btn-small btn-outline" style="width: 100%; text-align: center;">Влезте за покупка</a>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+    <p style="text-align: center; grid-column: 1/-1; color: #8a6e7a;">Няма намерени продукти. Опитайте с други критерии.</p>
+    {% endfor %}
+</div>
+{% endblock %}

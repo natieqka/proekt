@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2 style="color: #a55166; text-align: center;">Създаване на профил</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label>Потребителско име</label>
+            <input type="text" name="username" required>
+        </div>
+        <div class="form-group">
+            <label>Имейл</label>
+            <input type="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label>Парола</label>
+            <input type="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label>Потвърдете паролата</label>
+            <input type="password" name="confirm_password" required>
+        </div>
+        <button type="submit" class="btn" style="width: 100%;">Регистрация →</button>
+    </form>
+    <p style="text-align: center; margin-top: 1rem;">Вече имате профил? <a href="/login" style="color: #a55166;">Вход</a></p>
+</div>
+{% endblock %}

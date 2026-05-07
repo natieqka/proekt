@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="animate" style="text-align: center; padding: 4rem 1rem; background: linear-gradient(135deg, #fef7f0 0%, #f7dae7 100%); border-radius: 60px; margin-bottom: 3rem;">
+    <h1 style="font-size: 3.5rem; font-weight: 600; background: linear-gradient(135deg, #a55166, #d38c9d); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 1rem;">
+        Красотата блести естествено
+    </h1>
+    <p style="font-size: 1.3rem; color: #8a6e7a; max-width: 600px; margin: 0 auto 2rem;">
+        Открийте красота, която вдъхновява — ръчно изработена грижа за кожата
+    </p>
+    <a href="/products" class="btn" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Пазарувай сега →</a>
+</section>
+
+<section style="margin-bottom: 4rem;">
+    <h2 style="text-align: center; color: #a55166; font-size: 2rem; margin-bottom: 2rem;">Популярни категории</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+        <div style="background: linear-gradient(135deg, #f7dae7, #e2b4c1); padding: 2rem; border-radius: 30px; text-align: center;">
+            <div style="font-size: 2.5rem;">🧴</div>
+            <h3 style="color: #a55166; margin-top: 0.5rem;">Кремове</h3>
+            <p style="color: #8a6e7a;">Хидратация и подхранване</p>
+        </div>
+        <div style="background: linear-gradient(135deg, #e2b4c1, #d38c9d); padding: 2rem; border-radius: 30px; text-align: center;">
+            <div style="font-size: 2.5rem;">✨</div>
+            <h3 style="color: white; margin-top: 0.5rem;">Серуми</h3>
+            <p style="color: #fef7f0;">Избелване и анти-ейдж</p>
+        </div>
+        <div style="background: linear-gradient(135deg, #d38c9d, #a55166); padding: 2rem; border-radius: 30px; text-align: center;">
+            <div style="font-size: 2.5rem;">🌹</div>
+            <h3 style="color: white; margin-top: 0.5rem;">Маски за лице</h3>
+            <p style="color: #fef7f0;">Възстановяващи процедури</p>
+        </div>
+        <div style="background: linear-gradient(135deg, #f7dae7, #fef7f0); padding: 2rem; border-radius: 30px; text-align: center;">
+            <div style="font-size: 2.5rem;">🎁</div>
+            <h3 style="color: #a55166; margin-top: 0.5rem;">Подаръчни сетове</h3>
+            <p style="color: #8a6e7a;">Перфектни комбинации</p>
+        </div>
+    </div>
+</section>
+
+<section style="margin-bottom: 4rem;">
+    <h2 style="text-align: center; color: #a55166; font-size: 2rem; margin-bottom: 1rem;">Най-продавани продукти</h2>
+    <p style="text-align: center; color: #8a6e7a; margin-bottom: 2rem;">Открийте нашите най-любими грижи за кожата</p>
+
+    <div class="products-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-badge">
+                {% if loop.first %}⭐ ХИТ
+                {% elif loop.index == 2 %}🌿 НОВ
+                {% elif loop.index == 3 %}🔥 ТОП
+                {% else %}✨ ПОПУЛЯРЕН
+                {% endif %}
+            </div>
+            <div class="product-image">
+                {% if loop.index == 1 %}🌸
+                {% elif loop.index == 2 %}🍯
+                {% elif loop.index == 3 %}🌹
+                {% else %}✨
+                {% endif %}
+            </div>
+            <div class="product-info">
+                <div class="product-category">{{ product.category }}</div>
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-description">{{ product.description[:80] }}</p>
+                <p class="product-price">{{ "%.2f"|format(product.price) }} лв.</p>
+                {% if session.user_id %}
+                    <a href="/add_to_cart/{{ product.id }}" class="btn btn-small" style="width: 100%; text-align: center;">Добави в количка →</a>
+                {% else %}
+                    <a href="/login" class="btn btn-small btn-outline" style="width: 100%; text-align: center;">Влезте за покупка</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section style="background: linear-gradient(135deg, #f7dae7, #e2b4c1); border-radius: 60px; padding: 3rem; margin-bottom: 3rem; text-align: center;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem;">
+        <div>
+            <div style="font-size: 3rem;">🥑</div>
+            <h3 style="color: #a55166; margin-top: 1rem;">прясно</h3>
+            <p>Естествени съставки</p>
+        </div>
+        <div>
+            <div style="font-size: 3rem;">🌿</div>
+            <h3 style="color: #a55166; margin-top: 1rem;">прясно</h3>
+            <p>Ръчно изработено</p>
+        </div>
+        <div>
+            <div style="font-size: 3rem;">🌸</div>
+            <h3 style="color: #a55166; margin-top: 1rem;">прясно</h3>
+            <p>Без тестове върху животни</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 style="text-align: center; color: #a55166; font-size: 2rem; margin-bottom: 2rem;">Препоръчани продукти</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+        <div style="background: white; border-radius: 30px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div style="background: linear-gradient(135deg, #f7dae7, #e2b4c1); padding: 2rem; text-align: center;">
+                <div style="font-size: 3rem;">🍬</div>
+            </div>
+            <div style="padding: 1.5rem; text-align: center;">
+                <h3 style="color: #a55166;">ЗАХАРНА ПОЛИРОВКА</h3>
+                <p style="color: #8a6e7a; margin: 0.5rem 0;">Нежно ексфолираща полировка</p>
+                <p class="product-price">28.00 лв.</p>
+                <a href="/products" class="btn btn-small">Пазарувай</a>
+            </div>
+        </div>
+        <div style="background: white; border-radius: 30px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div style="background: linear-gradient(135deg, #e2b4c1, #d38c9d); padding: 2rem; text-align: center;">
+                <div style="font-size: 3rem;">🍵</div>
+            </div>
+            <div style="padding: 1.5rem; text-align: center;">
+                <h3 style="color: #a55166;">ЧЕРЕН ЧАЙ</h3>
+                <p style="color: #8a6e7a; margin: 0.5rem 0;">Антивъзрастов концентрат</p>
+                <p class="product-price">45.00 лв.</p>
+                <a href="/products" class="btn btn-small">Пазарувай</a>
+            </div>
+        </div>
+        <div style="background: white; border-radius: 30px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div style="background: linear-gradient(135deg, #d38c9d, #a55166); padding: 2rem; text-align: center;">
+                <div style="font-size: 3rem;">🌹</div>
+            </div>
+            <div style="padding: 1.5rem; text-align: center;">
+                <h3 style="color: #a55166;">РОЗОВА МАСКА</h3>
+                <p style="color: #8a6e7a; margin: 0.5rem 0;">Хидратираща маска с розови листенца</p>
+                <p class="product-price">32.00 лв.</p>
+                <a href="/products" class="btn btn-small">Пазарувай</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
